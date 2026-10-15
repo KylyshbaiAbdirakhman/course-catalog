@@ -8,8 +8,7 @@ export default function CourseCard({ id, title, description, credits, isElective
     <Link href={`/courses/${id}`}>
       <Card className="hover:shadow-md hover:border-blue-300 transition h-full">
         <CardHeader className="flex flex-row justify-between items-start space-y-0 pb-2">
-          <Ca
-          rdTitle className="text-lg">{title}</CardTitle>
+          <CardTitle className="text-lg">{title}</CardTitle>
           {isElective && (
             <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded font-medium ml-2">
               Электив
