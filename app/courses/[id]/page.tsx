@@ -1,18 +1,12 @@
-import { getCourse, getCourses } from '@/lib/courses';
+import { getCourse } from '@/lib/courses';
 import LikeButton from '@/components/LikeButton';
+import EnrollForm from '@/components/EnrollForm'; // 1. Импортируем компонент формы
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 type PageProps = {
   params: Promise<{ id: string }>;
 };
-
-export async function generateStaticParams() {
-  const courses = await getCourses();
-  return courses.map((course) => ({
-    id: course.id,
-  }));
-}
 
 export default async function CoursePage({ params }: PageProps) {
   const { id } = await params;
@@ -44,9 +38,14 @@ export default async function CoursePage({ params }: PageProps) {
           <span className="text-gray-700 font-medium">
             Кредиты: <strong className="text-gray-900">{course.credits}</strong>
           </span>
-          
-          <LikeButton initialLikes={course.likes} />
+
+          <LikeButton courseId={course.id} initialLikes={course.likes} />
         </div>
+      </div>
+
+      {/* 2. Добавляем форму записи под карточкой курса */}
+      <div className="mt-8">
+        <EnrollForm courseId={course.id} />
       </div>
     </main>
   );
